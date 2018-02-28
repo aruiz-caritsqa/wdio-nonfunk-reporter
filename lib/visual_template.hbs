@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Visual Regression Report">
+
+    <title>Visual Regression Report</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+      body {
+        background-color: #fafafa;
+        font-weight: 200;
+      }
+      h1, .h1, h2, .h2, h3, .h3 {
+        margin: 10px;
+        font-weight: 200;
+      }
+      h1, .h1 {
+        font-size: 30px;
+      }
+      h2, .h2 {
+        font-size: 24px;
+      }
+      h3, .h3 {
+        font-size: 20px;
+      }
+      table {
+        width: 100%;
+      }
+      .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+        /*border-color: #ECEFF1;*/
+      }
+      .table-bordered>tbody>tr, .table-bordered>tfoot>tr {
+        background-color: white;
+      }
+      .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-color: #ECEFF1;
+      }
+
+      .screenshot-small {
+        /* height: 50%; */
+        /* width: 50%; */
+        width: 400px;
+      }
+
+      .screenshot-large {
+        /* height: 100%; */
+        width: 1130px;
+      }
+
+      .screenshot-hidden {
+        display: none;
+      }
+
+      .screen-different {
+        background-color: #FFCDD2;
+      }
+
+      .screen-identical {
+        background-color: #C8E6C9;
+      }
+
+      .screen-similar {
+        background-color: #dce6b6
+      }
+
+      .screen-new {
+        background-color: #B3E5FC;
+      }
+
+
+      .screen-orphan {
+        background-color: #FED88F;
+      }
+
+
+
+
+      .screenshotWrapper {
+        max-width: 1024px;
+      }
+
+     .filter {
+        border: 1px solid;
+        padding: 4px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="page-header"><h1>Visual Regression Report</h1></div>
+
+      <h2>Summary</h2>
+      <table class="table">
+        <thead>
+          <th>Key</th>
+          <th>Value</th>
+        </thead>
+
+        <tbody>
+          <!-- <tr><td>Start</td><td>{{stats.start}}</td></tr>
+          <tr><td>End</td><td>{{stats.end}}</td></tr>
+          <tr><td>Duration</td><td>{{#humanizeDuration stats._duration}}{{/humanizeDuration}}</td></tr>
+          <tr><td>Breakdown</td><td>
+            <table class="table table-bordered">
+              <tr>
+                <td class='test-pass'>Passes</td><td class='test-pending'>Pending</td><td class='test-fail'>Failures</td>
+              </tr>
+              <tr>
+                <td>{{stats.counts.passes}}</td><td>{{stats.counts.pending}}</td><td>{{stats.counts.failures}}</td>
+              </tr>
+            </table>
+          </td></tr> -->
+        </tbody>
+      </table>
+
+      <!-- <table class="table table-bordered">
+        <tr>
+          <td>
+            <span class="filter toggleFailingTests"><span>Hide</span> Failing Tests</span>
+            <span class="filter togglePassingTests"><span>Hide</span> Passing Tests</span>
+
+          </td>
+        </tr>
+      </table> -->
+
+
+      <h2>Results</h2>
+      {{#each runners as |runner|}}
+        <table class="table table-bordered">
+          <tr>
+            <th>Title</th><td>{{runner.title}}</td>
+          <tr></tr>
+            <th>Specfile</th><td>{{runner.specfile}}</td>
+          <tr></tr>
+            <th>Duration</th><td>{{#humanizeDuration runner.duration}}{{/humanizeDuration}}</td>
+          </tr>
+        </table>
+
+        <table class="table table-bordered">
+          {{#each runner.screenshots as |screenshot|}}
+            <tr>
+              <td class="{{screenshot.status}}">
+                <h3>{{screenshot.url}}</h3>
+                <h5>{{screenshot.status}}</h5>
+                <h5>{{screenshot.desc}}</h5>
+                <div class="screenshot-image">
+                  <img class="screenshot-small" src="{{screenshot.filename}}" />
+                  <img class="screenshot-large" style="display: none" src="{{#largeScreenshot screenshot}}{{/largeScreenshot}}" />
+                </div>
+              </td>
+            </tr>
+          {{/each}}
+        </table>
+
+      {{/each}}
+
+
+    </div>
+
+    <script type="text/javascript">
+      // increase/decrease size of screenshot
+      $('.screenshot-image img').click(function() {
+        $(this).parent().find('.screenshot-small').toggle();
+        $(this).parent().find('.screenshot-large').toggle();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "wdio-nonfunk-reporter",
+  "version": "0.0.1",
+  "description": "A reporter for a range of Non Functional tests when using webdriver.io",
+  "main": "lib/reporter.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aruiz-caritsqa/wdio-nonfunk-reporter.git"
+  },
+  "keywords": [
+    "wdio",
+    "non functional",
+    "testing",
+    "reporter"
+  ],
+  "author": "Adrien Ruiz Gauder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aruiz-caritsqa/wdio-nonfunk-reporter/issues"
+  },
+  "homepage": "https://github.com/aruiz-caritsqa/wdio-nonfunk-reporter#readme",
+  "dependencies": {
+    "blink-diff": "^1.0.13",
+    "fs-extra": "^5.0.0",
+    "handlebars": "^4.0.11",
+    "locus": "^2.0.1",
+    "moment": "^2.20.1",
+    "moment-duration-format": "^2.2.2"
+  }
+}
